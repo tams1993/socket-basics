@@ -18,6 +18,8 @@ socket.on('message', function (message) {
     //     }
     // })
 
+    jQuery('.messages').append('<p>'+ message.text+' </p>');
+
 });
 
 // Handles submitting of new message
