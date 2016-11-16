@@ -2,6 +2,7 @@
  * Created by Mr.t Notebook on 11/15/2016.
  */
 var PORT = process.env.PORT || 3000;
+var moment = require('moment');
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -15,6 +16,7 @@ io.on('connection', function (socket) {
 
         console.log('Message received:' + message.text);
 
+        message.timestamp = moment().valueOf();
         //Send to everyone including self
         io.emit('message', message);
 
@@ -23,9 +25,9 @@ io.on('connection', function (socket) {
     });
 
     socket.emit('message', {
-
-        text: 'Welcome to the chat application!'
-
+        name: 'System',
+        text: 'Welcome to the chat application!',
+        timestampe: moment().valueOf()
     });
 
 });
