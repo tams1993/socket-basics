@@ -9,8 +9,23 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 app.use(express.static(__dirname + '/public'));
+
+var clientInfo = {};
+
 io.on('connection', function (socket) {
     console.log('User connected via socket.io! ');
+
+    socket.on('joinRoom', function (req) {
+        clientInfo[socket.id] = req;
+        socket.join(req.room);
+        socket.broadcast.to(req.room).emit('message', {
+
+            name: 'System',
+            text: req.name + ' has joined!',
+            timestamp: moment().valueOf()
+        });
+
+    });
 
     socket.on('message', function (message) {
 
@@ -18,7 +33,7 @@ io.on('connection', function (socket) {
 
         message.timestamp = moment().valueOf();
         //Send to everyone including self
-        io.emit('message', message);
+        io.to(clientInfo[socket.id].room).emit('message', message);
 
         // Send to everybody but sender
         // socket.broadcast.emit('message', message);
