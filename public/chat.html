@@ -3,22 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello World</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
+<div class="container">
 
-<a href="index.html">Change Settings</a>
+    <div class="row">
 
-<h1 class="room-title"></h1>
+        <div class="col-md-6 col-md-offset-3 well">
 
-<div class="messages">
-    <!--<h1 >{{message}}</h1>-->
+            <a href="index.html">Change Settings</a>
 
-    <form id="message-form">
+            <h1 class="room-title"></h1>
 
-        <input type="text" name="message"/>
-        <input type="submit"/>
+            <ul class="messages list-group">
+                <!--<h1 >{{message}}</h1>-->
+            </ul>
 
-    </form>
+            <form id="message-form">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-comment"></i>
+                        </span>
+                        <input type="text" name="message" class="form-control"/>
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default btn-block"/>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
 
 </div>
 <script
